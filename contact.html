@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Miyoung Cho</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .contact-cta {
+      padding: 80px 40px 60px;
+      border-bottom: 1px solid var(--gray-2);
+      max-width: var(--max-w); margin: 0 auto;
+    }
+
+    .contact-cta-label {
+      font-size: 0.75rem; font-weight: 700;
+      color: var(--gray-4); text-transform: uppercase;
+      letter-spacing: 2px; margin-bottom: 20px;
+    }
+
+    .contact-cta-title {
+      font-family: var(--font-head);
+      font-size: clamp(42px, 6vw, 88px);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -3px; color: var(--black);
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">Miyoung Cho</a>
+    <div class="nav-right">
+      <a href="work.html"    class="nav-link">Work</a>
+      <a href="about.html"   class="nav-link">About</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+      <div class="nav-badge">
+        <span class="dot"></span>
+        Available
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ── CTA Hero ── -->
+    <div class="contact-cta">
+      <p class="contact-cta-label fade-in">Get In Touch</p>
+      <h1 class="contact-cta-title fade-in stagger-1">
+        Let's Work<br/>Together.
+      </h1>
+      <a href="mailto:jmy97@yahoo.com" class="contact-email-link fade-in stagger-2">
+        jmy97@yahoo.com
+      </a>
+    </div>
+
+    <!-- ── Split: Info + Form ── -->
+    <div class="contact-split">
+
+      <!-- Left — Contact Info -->
+      <div class="fade-in">
+        <p class="contact-info-title">Availability</p>
+        <p class="contact-avail">
+          I'm currently available for freelance projects and full-time opportunities.
+          If you have a project in mind or just want to say hello, don't hesitate to reach out.
+          I typically respond within 24–48 hours.
+        </p>
+
+        <p class="contact-info-title" style="margin-top:32px;">Find Me Online</p>
+        <div class="contact-socials">
+          <a href="#" class="contact-social-link">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="#" class="contact-social-link">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Behance
+          </a>
+          <a href="#" class="contact-social-link">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Dribbble
+          </a>
+          <a href="#" class="contact-social-link">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Instagram
+          </a>
+        </div>
+
+        <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--gray-2);">
+          <p class="contact-info-title">Based In</p>
+          <p style="font-size:0.9rem;color:var(--gray-5);">Seoul, South Korea</p>
+          <p style="font-size:0.9rem;color:var(--gray-4);margin-top:4px;">Open to remote & on-site</p>
+        </div>
+      </div>
+
+      <!-- Right — Form -->
+      <div class="fade-in stagger-1">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="name">Your Name</label>
+            <input class="form-input" type="text" id="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input class="form-input" type="email" id="email" placeholder="jane@example.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input class="form-input" type="text" id="subject" placeholder="Project Inquiry" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-textarea" id="message" rows="6"
+              placeholder="Tell me about your project, timeline, and budget..." required></textarea>
+          </div>
+          <button class="form-btn" type="submit" id="submitBtn">
+            Send Message →
+          </button>
+          <p id="success-msg" style="display:none;font-size:0.85rem;color:#22c55e;margin-top:8px;">
+            ✓ Message sent! I'll get back to you soon.
+          </p>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Miyoung Cho. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="mailto:jmy97@yahoo.com" class="footer-link">jmy97@yahoo.com</a>
+      <a href="#" class="footer-link">LinkedIn</a>
+      <a href="#" class="footer-link">Behance</a>
+      <a href="#" class="footer-link">Dribbble</a>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    setTimeout(() => {
+      document.querySelectorAll('.contact-cta .fade-in').forEach(el => el.classList.add('visible'));
+    }, 100);
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('success-msg');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.style.display = 'none';
+        msg.style.display = 'block';
+        e.target.reset();
+      }, 1200);
+    }
+  </script>
+</body>
+</html>

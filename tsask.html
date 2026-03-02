@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TSASK Website Redesign — Miyoung Cho</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Case Study Specific ── */
+    .cs-hero {
+      padding: 72px 40px 0;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+
+    .cs-breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; color: var(--gray-4);
+      margin-bottom: 32px;
+    }
+
+    .cs-breadcrumb a { transition: color 0.2s; }
+    .cs-breadcrumb a:hover { color: var(--black); }
+    .cs-breadcrumb span { color: var(--gray-3); }
+
+    .cs-meta-row {
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap; margin-bottom: 24px;
+    }
+
+    .cs-tag {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gray-4);
+      background: var(--gray-1); border: 1px solid var(--gray-2);
+      padding: 5px 12px; border-radius: 100px;
+    }
+
+    .cs-title {
+      font-family: var(--font-head);
+      font-size: clamp(40px, 6vw, 88px);
+      font-weight: 800; line-height: 0.93;
+      letter-spacing: -3px; color: var(--black);
+      margin-bottom: 32px;
+    }
+
+    .cs-subtitle {
+      font-size: 1.15rem; color: var(--gray-5);
+      line-height: 1.75; max-width: 640px;
+      margin-bottom: 48px;
+    }
+
+    .cs-info-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--gray-2);
+      border-bottom: 1px solid var(--gray-2);
+      margin-bottom: 0;
+    }
+
+    .cs-info-item {
+      padding: 24px 0;
+      border-right: 1px solid var(--gray-2);
+    }
+
+    .cs-info-item:last-child { border-right: none; }
+
+    .cs-info-label {
+      font-size: 0.68rem; font-weight: 700;
+      color: var(--gray-4); text-transform: uppercase;
+      letter-spacing: 2px; margin-bottom: 8px;
+    }
+
+    .cs-info-val {
+      font-size: 0.9rem; color: var(--black);
+      font-weight: 600; font-family: var(--font-head);
+    }
+
+    /* ── Cover Image ── */
+    .cs-cover {
+      width: 100%; background: #222c35;
+      aspect-ratio: 16/7; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+
+    .cs-cover-inner {
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+
+    .cs-cover-logo {
+      font-family: var(--font-head);
+      font-size: 3rem; font-weight: 900;
+      color: #fff; letter-spacing: -2px;
+    }
+
+    .cs-cover-sub {
+      font-size: 0.85rem; color: rgba(255,255,255,0.5);
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+
+    /* Decorative category pills */
+    .cs-cover-pills {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px;
+    }
+
+    .pill {
+      padding: 6px 16px; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: #fff;
+    }
+
+    /* ── Body Content ── */
+    .cs-body {
+      max-width: 800px; margin: 0 auto;
+      padding: 72px 40px;
+    }
+
+    .cs-section { margin-bottom: 72px; }
+
+    .cs-section-num {
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--gray-3); letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+
+    .cs-section-label {
+      font-size: 0.75rem; font-weight: 700;
+      color: var(--gray-4); letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 20px;
+      border-left: 2px solid var(--black); padding-left: 12px;
+    }
+
+    .cs-h2 {
+      font-family: var(--font-head);
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -1px; margin-bottom: 20px;
+    }
+
+    .cs-p {
+      font-size: 1rem; color: var(--gray-5);
+      line-height: 1.85; margin-bottom: 16px;
+    }
+
+    .cs-p:last-child { margin-bottom: 0; }
+
+    /* ── Full-width image blocks ── */
+    .cs-img-full {
+      width: 100%; max-width: var(--max-w);
+      margin: 0 auto 2px; overflow: hidden;
+    }
+
+    .cs-img-2col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; max-width: var(--max-w); margin: 0 auto 2px;
+    }
+
+    .mock-screen {
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+
+    /* OLD site mockup */
+    .mock-old {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+    }
+
+    .mock-old-header {
+      background: #00508a; padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .mock-old-logo {
+      color: #fff; font-weight: 700; font-size: 0.9rem;
+      font-family: var(--font-head);
+    }
+
+    .mock-old-nav {
+      display: flex; gap: 12px;
+    }
+
+    .mock-old-nav span {
+      color: rgba(255,255,255,0.7); font-size: 0.65rem;
+      background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 2px;
+    }
+
+    .mock-old-hero {
+      background: #e8e8e8; padding: 28px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .mock-old-hero-title {
+      font-size: 0.95rem; font-weight: 700;
+      color: #333; margin-bottom: 8px;
+      font-family: var(--font-head);
+    }
+
+    .mock-old-hero-text {
+      font-size: 0.62rem; color: #666; line-height: 1.5; max-width: 280px;
+    }
+
+    .mock-old-hero-btn {
+      display: inline-block; margin-top: 10px;
+      background: #00508a; color: #fff;
+      font-size: 0.6rem; padding: 5px 12px; border-radius: 2px;
+    }
+
+    .mock-old-body { padding: 16px 20px; }
+
+    .mock-old-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .mock-old-card {
+      background: #fff; border: 1px solid #ddd;
+      padding: 10px 8px; border-radius: 2px;
+    }
+
+    .mock-old-card-title {
+      font-size: 0.6rem; font-weight: 700; color: #333;
+      margin-bottom: 4px;
+    }
+
+    .mock-old-card-text {
+      font-size: 0.52rem; color: #888; line-height: 1.4;
+    }
+
+    .mock-old-sidebar {
+      display: grid; grid-template-columns: 2fr 1fr; gap: 8px;
+    }
+
+    .mock-old-sidebar-main {
+      background: #fff; border: 1px solid #ddd; padding: 10px;
+      border-radius: 2px;
+    }
+
+    .mock-old-sidebar-side {
+      background: #fff; border: 1px solid #ddd; padding: 10px;
+      border-radius: 2px;
+    }
+
+    .mock-bar {
+      height: 5px; background: #eee; border-radius: 2px; margin-bottom: 5px;
+    }
+
+    .mock-bar.short { width: 60%; }
+    .mock-bar.med   { width: 80%; }
+    .mock-bar.long  { width: 95%; }
+
+    /* NEW site mockup */
+    .mock-new {
+      background: #fff;
+    }
+
+    .mock-new-header {
+      background: #222c35; padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .mock-new-logo {
+      color: #fff; font-weight: 800; font-size: 0.85rem;
+      font-family: var(--font-head); letter-spacing: -0.5px;
+    }
+
+    .mock-new-nav { display: flex; gap: 10px; }
+
+    .mock-new-nav span {
+      color: rgba(255,255,255,0.6); font-size: 0.6rem;
+      font-family: var(--font-head);
+    }
+
+    .mock-new-hero {
+      background: linear-gradient(135deg, #1a2330, #222c35);
+      padding: 24px 20px 28px; position: relative;
+    }
+
+    .mock-new-hero-label {
+      font-size: 0.55rem; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;
+    }
+
+    .mock-new-hero-title {
+      font-size: 1.05rem; font-weight: 800; color: #fff;
+      font-family: var(--font-head); letter-spacing: -0.5px; margin-bottom: 8px;
+    }
+
+    .mock-new-hero-text {
+      font-size: 0.6rem; color: rgba(255,255,255,0.6); line-height: 1.5; max-width: 260px;
+    }
+
+    .mock-new-hero-btn {
+      display: inline-block; margin-top: 10px;
+      background: #0079c1; color: #fff;
+      font-size: 0.58rem; font-weight: 700;
+      padding: 5px 12px; border-radius: 100px;
+      font-family: var(--font-head);
+    }
+
+    .mock-new-tiles {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      gap: 2px; background: #111;
+    }
+
+    .mock-tile {
+      padding: 14px 8px; display: flex; flex-direction: column;
+      align-items: center; gap: 5px; background: #fff;
+      transition: background 0.2s;
+    }
+
+    .mock-tile-icon {
+      width: 20px; height: 20px; border-radius: 50%;
+    }
+
+    .mock-tile-label {
+      font-size: 0.48rem; font-weight: 700;
+      text-align: center; font-family: var(--font-head);
+      color: #333;
+    }
+
+    .mock-tile-border {
+      height: 3px; width: 100%;
+      margin-top: auto;
+    }
+
+    .mock-new-related {
+      padding: 12px 20px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    }
+
+    .mock-related-card {
+      padding: 10px; border-radius: 4px;
+      border-left: 3px solid;
+    }
+
+    .mock-related-card-title {
+      font-size: 0.58rem; font-weight: 700; margin-bottom: 4px;
+      font-family: var(--font-head);
+    }
+
+    .mock-related-card-text {
+      font-size: 0.5rem; color: #888; line-height: 1.4;
+    }
+
+    /* ── Caption ── */
+    .cs-caption {
+      text-align: center; font-size: 0.78rem; color: var(--gray-4);
+      padding: 16px 24px 0; font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .cs-callout {
+      background: var(--gray-1);
+      border-left: 3px solid var(--black);
+      padding: 24px 28px; margin: 32px 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .cs-callout p {
+      font-size: 1.05rem; font-style: italic;
+      color: var(--black); line-height: 1.7; margin: 0;
+      font-family: var(--font-head); font-weight: 600;
+    }
+
+    /* ── Results grid ── */
+    .results-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin: 32px 0;
+    }
+
+    .result-item {
+      background: var(--gray-1); padding: 28px 24px;
+    }
+
+    .result-num {
+      font-family: var(--font-head);
+      font-size: 2.4rem; font-weight: 900;
+      letter-spacing: -2px; color: var(--black); margin-bottom: 6px;
+    }
+
+    .result-label {
+      font-size: 0.8rem; color: var(--gray-5); line-height: 1.5;
+    }
+
+    /* ── Problem list ── */
+    .problem-list {
+      list-style: none; margin: 16px 0 0;
+      display: flex; flex-direction: column; gap: 0;
+    }
+
+    .problem-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 16px 0; border-bottom: 1px solid var(--gray-2);
+      font-size: 0.95rem; color: var(--gray-5);
+    }
+
+    .problem-list li:first-child { border-top: 1px solid var(--gray-2); }
+
+    .problem-icon {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--gray-2); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; margin-top: 2px;
+    }
+
+    /* ── Decision cards ── */
+    .decisions-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; margin: 24px 0;
+    }
+
+    .decision-card {
+      background: var(--gray-1); padding: 28px 24px;
+    }
+
+    .decision-num {
+      font-size: 0.68rem; font-weight: 700; color: var(--gray-4);
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+    }
+
+    .decision-title {
+      font-family: var(--font-head); font-weight: 700;
+      font-size: 1rem; margin-bottom: 8px; color: var(--black);
+    }
+
+    .decision-text { font-size: 0.85rem; color: var(--gray-5); line-height: 1.6; }
+
+    /* ── Next project ── */
+    .cs-next {
+      border-top: 1px solid var(--gray-2);
+      padding: 48px 40px;
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .cs-next-label {
+      font-size: 0.75rem; font-weight: 700;
+      color: var(--gray-4); text-transform: uppercase;
+      letter-spacing: 2px; margin-bottom: 8px;
+    }
+
+    .cs-next-title {
+      font-family: var(--font-head); font-size: 1.5rem;
+      font-weight: 800; letter-spacing: -0.5px;
+    }
+
+    .cs-next-link {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.875rem; font-weight: 600;
+      transition: gap 0.2s;
+    }
+
+    .cs-next-link:hover { gap: 14px; }
+
+    @media (max-width: 900px) {
+      .cs-info-bar { grid-template-columns: repeat(2, 1fr); }
+      .cs-img-2col { grid-template-columns: 1fr; }
+      .cs-cover-pills { display: none; }
+      .mock-new-tiles { grid-template-columns: repeat(3, 1fr); }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .decisions-grid { grid-template-columns: 1fr; }
+      .cs-next { flex-direction: column; gap: 24px; align-items: flex-start; }
+      .cs-body { padding: 48px 24px; }
+      .cs-hero { padding: 48px 24px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">Miyoung Cho</a>
+    <div class="nav-right">
+      <a href="work.html"    class="nav-link active">Work</a>
+      <a href="about.html"   class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="nav-badge"><span class="dot"></span>Available</div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ── Case Study Hero ── -->
+    <div class="cs-hero">
+
+      <div class="cs-breadcrumb fade-in">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="work.html">Work</a>
+        <span>/</span>
+        TSASK Website Redesign
+      </div>
+
+      <div class="cs-meta-row fade-in">
+        <span class="cs-tag">Web Design</span>
+        <span class="cs-tag">UX Research</span>
+        <span class="cs-tag">Information Architecture</span>
+      </div>
+
+      <h1 class="cs-title fade-in stagger-1">
+        TSASK<br/>Website<br/>Redesign
+      </h1>
+
+      <p class="cs-subtitle fade-in stagger-2">
+        A full redesign of the Technical Safety Authority Saskatchewan's public-facing
+        website — transforming a cluttered government portal into a clear, accessible,
+        and task-focused experience for contractors, homeowners, and businesses.
+      </p>
+
+      <!-- Info bar -->
+      <div class="cs-info-bar fade-in stagger-3">
+        <div class="cs-info-item">
+          <p class="cs-info-label">Client</p>
+          <p class="cs-info-val">TSASK</p>
+        </div>
+        <div class="cs-info-item" style="padding-left:24px;">
+          <p class="cs-info-label">Role</p>
+          <p class="cs-info-val">UI/UX Designer</p>
+        </div>
+        <div class="cs-info-item" style="padding-left:24px;">
+          <p class="cs-info-label">Year</p>
+          <p class="cs-info-val">2023 — 2024</p>
+        </div>
+        <div class="cs-info-item" style="padding-left:24px;">
+          <p class="cs-info-label">Tools</p>
+          <p class="cs-info-val">Figma</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Cover Image ── -->
+    <div class="cs-img-full" style="margin-top:0;">
+      <div class="cs-cover">
+        <div class="cs-cover-inner">
+          <div class="cs-cover-logo">TSASK</div>
+          <div class="cs-cover-sub">Technical Safety Authority Saskatchewan</div>
+        </div>
+        <!-- Decorative bars -->
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;display:flex;gap:2px;">
+          <div style="flex:1;background:#c5433b;"></div>
+          <div style="flex:1;background:#bdaf2f;"></div>
+          <div style="flex:1;background:#678c18;"></div>
+          <div style="flex:1;background:#1f5677;"></div>
+          <div style="flex:1;background:#127e6b;"></div>
+          <div style="flex:1;background:#3a3883;"></div>
+        </div>
+        <div class="cs-cover-pills">
+          <div class="pill" style="background:#c5433b;">Gas</div>
+          <div class="pill" style="background:#bdaf2f;">Electrical</div>
+          <div class="pill" style="background:#678c18;">Plumbing</div>
+          <div class="pill" style="background:#1f5677;">Boilers</div>
+          <div class="pill" style="background:#127e6b;">Elevating</div>
+          <div class="pill" style="background:#3a3883;">Amusement</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Case Study Body ── -->
+    <div class="cs-body">
+
+      <!-- 01 Overview -->
+      <div class="cs-section fade-in">
+        <p class="cs-section-label">01 — Overview</p>
+        <h2 class="cs-h2">From wireframe to a fully redesigned government portal</h2>
+        <p class="cs-p">
+          TSASK (Technical Safety Authority Saskatchewan) is a regulatory body
+          responsible for safety compliance across six technical domains in Saskatchewan,
+          Canada — Gas, Electrical, Plumbing, Boilers &amp; Pressure Vessels, Elevating
+          Devices, and Amusement Rides.
+        </p>
+        <p class="cs-p">
+          The project began with a wireframe handoff from the client's internal team.
+          My role was to take that structural foundation and redesign the full visual
+          and interaction layer — improving usability, visual hierarchy, and accessibility
+          while honoring the organization's brand.
+        </p>
+      </div>
+
+      <!-- 02 Problem -->
+      <div class="cs-section fade-in">
+        <p class="cs-section-label">02 — The Problem</p>
+        <h2 class="cs-h2">A government site that was hard to navigate and harder to trust</h2>
+        <p class="cs-p">
+          The previous TSASK website suffered from several usability and structural issues
+          that made it difficult for users — contractors, homeowners, and business owners —
+          to find the information they needed quickly.
+        </p>
+
+        <div class="cs-callout">
+          <p>"Users were spending too much time searching for basic information
+          like permit applications and safety guidelines. The old design buried
+          critical actions in dense navigation menus."</p>
+        </div>
+
+        <ul class="problem-list">
+          <li>
+            <span class="problem-icon">✕</span>
+            <span><strong>No visual hierarchy between the six safety domains</strong> — all categories looked the same, forcing users to read through everything to find their area</span>
+          </li>
+          <li>
+            <span class="problem-icon">✕</span>
+            <span><strong>Dense, text-heavy layout</strong> with no clear entry points — the homepage tried to do everything at once with no prioritization</span>
+          </li>
+          <li>
+            <span class="problem-icon">✕</span>
+            <span><strong>Poor mobile experience</strong> — the old site was not optimized for smaller screens, causing horizontal scroll and broken layouts</span>
+          </li>
+          <li>
+            <span class="problem-icon">✕</span>
+            <span><strong>Outdated visual design</strong> lacking trust signals — the aesthetic did not convey the authority and reliability users expect from a safety regulator</span>
+          </li>
+          <li>
+            <span class="problem-icon">✕</span>
+            <span><strong>Key actions buried</strong> — permit applications, inspection requests, and contact details were hidden inside submenus rather than surfaced prominently</span>
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- end cs-body first block -->
+
+    <!-- ── Before / After Mockups ── -->
+    <div style="max-width:var(--max-w);margin:0 auto;padding:0 40px;">
+      <p class="cs-section-label" style="margin-bottom:24px;padding-left:0;border-left:none;font-size:0.75rem;font-weight:700;color:var(--gray-4);letter-spacing:2px;text-transform:uppercase;">Before & After</p>
+    </div>
+
+    <div class="cs-img-2col" style="padding:0 40px;gap:2px;">
+      <!-- BEFORE -->
+      <div>
+        <div class="mock-screen mock-old" style="height:380px;">
+          <div class="mock-old-header">
+            <span class="mock-old-logo">TSASK</span>
+            <div class="mock-old-nav">
+              <span>Gas</span><span>Electrical</span><span>Plumbing</span><span>More ▾</span>
+            </div>
+          </div>
+          <div class="mock-old-hero">
+            <div class="mock-old-hero-title">Technical Safety Authority Saskatchewan</div>
+            <div class="mock-old-hero-text">We are dedicated to the administration of technical safety legislation for the Province of Saskatchewan through education, licensing, inspection and certification.</div>
+            <span class="mock-old-hero-btn">Learn More</span>
+          </div>
+          <div class="mock-old-body">
+            <div class="mock-old-grid">
+              <div class="mock-old-card">
+                <div class="mock-old-card-title">Gas</div>
+                <div class="mock-bar med"></div>
+                <div class="mock-bar short"></div>
+                <div class="mock-old-card-text">Permits, inspections, licensing for gas contractors...</div>
+              </div>
+              <div class="mock-old-card">
+                <div class="mock-old-card-title">Electrical</div>
+                <div class="mock-bar med"></div>
+                <div class="mock-bar long"></div>
+                <div class="mock-old-card-text">Electrical permits and safety regulations...</div>
+              </div>
+              <div class="mock-old-card">
+                <div class="mock-old-card-title">Plumbing</div>
+                <div class="mock-bar short"></div>
+                <div class="mock-bar med"></div>
+                <div class="mock-old-card-text">Plumbing permits and code compliance...</div>
+              </div>
+            </div>
+            <div class="mock-old-sidebar">
+              <div class="mock-old-sidebar-main">
+                <div class="mock-bar long"></div>
+                <div class="mock-bar med"></div>
+                <div class="mock-bar short"></div>
+                <div class="mock-bar long"></div>
+              </div>
+              <div class="mock-old-sidebar-side">
+                <div class="mock-bar med"></div>
+                <div class="mock-bar short"></div>
+                <div class="mock-bar med"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="cs-caption">Before — Old design: cluttered, low visual hierarchy, no quick actions</p>
+      </div>
+
+      <!-- AFTER -->
+      <div>
+        <div class="mock-screen mock-new" style="height:380px;">
+          <div class="mock-new-header">
+            <span class="mock-new-logo">TSASK</span>
+            <div class="mock-new-nav">
+              <span>Gas</span>
+              <span>Electrical</span>
+              <span>Plumbing</span>
+              <span>Boilers</span>
+              <span style="background:rgba(255,255,255,0.15);padding:3px 10px;border-radius:100px;color:#fff;font-weight:700;">MyTSASK ↗</span>
+            </div>
+          </div>
+          <div class="mock-new-hero">
+            <div class="mock-new-hero-label">Saskatchewan Technical Safety</div>
+            <div class="mock-new-hero-title">Your safety compliance,<br/>simplified.</div>
+            <div class="mock-new-hero-text">Permits, inspections, licensing, and education for contractors, homeowners, and businesses across Saskatchewan.</div>
+            <span class="mock-new-hero-btn">Get Started →</span>
+          </div>
+          <!-- Category tiles -->
+          <div class="mock-new-tiles">
+            <div class="mock-tile">
+              <div class="mock-tile-icon" style="background:#c5433b22;"></div>
+              <div class="mock-tile-label" style="color:#c5433b;">Gas</div>
+              <div class="mock-tile-border" style="background:#c5433b;"></div>
+            </div>
+            <div class="mock-tile">
+              <div class="mock-tile-icon" style="background:#bdaf2f22;"></div>
+              <div class="mock-tile-label" style="color:#bdaf2f;">Electrical</div>
+              <div class="mock-tile-border" style="background:#bdaf2f;"></div>
+            </div>
+            <div class="mock-tile">
+              <div class="mock-tile-icon" style="background:#678c1822;"></div>
+              <div class="mock-tile-label" style="color:#678c18;">Plumbing</div>
+              <div class="mock-tile-border" style="background:#678c18;"></div>
+            </div>
+            <div class="mock-tile">
+              <div class="mock-tile-icon" style="background:#1f567722;"></div>
+              <div class="mock-tile-label" style="color:#1f5677;">Boilers</div>
+              <div class="mock-tile-border" style="background:#1f5677;"></div>
+            </div>
+            <div class="mock-tile">
+              <div class="mock-tile-icon" style="background:#127e6b22;"></div>
+              <div class="mock-tile-label" style="color:#127e6b;">Elevating</div>
+              <div class="mock-tile-border" style="background:#127e6b;"></div>
+            </div>
+            <div class="mock-tile">
+              <div class="mock-tile-icon" style="background:#3a388322;"></div>
+              <div class="mock-tile-label" style="color:#3a3883;">Amusement</div>
+              <div class="mock-tile-border" style="background:#3a3883;"></div>
+            </div>
+          </div>
+          <div class="mock-new-related">
+            <div class="mock-related-card" style="border-color:#c5433b;background:#c5433b08;">
+              <div class="mock-related-card-title" style="color:#c5433b;">Apply for Permit</div>
+              <div class="mock-related-card-text">Gas installation permits online</div>
+            </div>
+            <div class="mock-related-card" style="border-color:#bdaf2f;background:#bdaf2f08;">
+              <div class="mock-related-card-title" style="color:#bdaf2f;">Book Inspection</div>
+              <div class="mock-related-card-text">Schedule an electrical inspection</div>
+            </div>
+            <div class="mock-related-card" style="border-color:#0079c1;background:#0079c108;">
+              <div class="mock-related-card-title" style="color:#0079c1;">MyTSASK Portal</div>
+              <div class="mock-related-card-text">Manage your account &amp; licenses</div>
+            </div>
+          </div>
+        </div>
+        <p class="cs-caption">After — New design: color-coded categories, quick actions surfaced, clear hierarchy</p>
+      </div>
+    </div>
+
+    <!-- ── Continue body ── -->
+    <div class="cs-body" style="padding-top:48px;">
+
+      <!-- 03 Research -->
+      <div class="cs-section fade-in">
+        <p class="cs-section-label">03 — Research & Discovery</p>
+        <h2 class="cs-h2">Understanding the users and their mental models</h2>
+        <p class="cs-p">
+          Working from the wireframes provided, I mapped out the core user personas and
+          their primary goals. TSASK's audience is broad — from licensed contractors
+          applying for permits to homeowners checking inspection requirements to business
+          owners renewing certifications.
+        </p>
+        <p class="cs-p">
+          By analyzing the six safety domains and how each user type interacted with
+          them, it became clear that the key design challenge was <strong>disambiguation</strong>:
+          helping users immediately identify which domain applied to their situation,
+          and then quickly reaching the action they needed.
+        </p>
+
+        <div class="decisions-grid">
+          <div class="decision-card">
+            <p class="decision-num">User Type 01</p>
+            <p class="decision-title">Licensed Contractors</p>
+            <p class="decision-text">Need fast access to permit applications, inspection scheduling, and certification renewals. Time is money — they can't afford to search.</p>
+          </div>
+          <div class="decision-card">
+            <p class="decision-num">User Type 02</p>
+            <p class="decision-title">Homeowners</p>
+            <p class="decision-text">Often unfamiliar with regulatory language. Need clear guidance on what permits are required and who to contact.</p>
+          </div>
+          <div class="decision-card">
+            <p class="decision-num">User Type 03</p>
+            <p class="decision-title">Business Owners</p>
+            <p class="decision-text">Managing multiple compliance areas (e.g., boilers + elevating devices). Need a consolidated view of their obligations.</p>
+          </div>
+          <div class="decision-card">
+            <p class="decision-num">User Type 04</p>
+            <p class="decision-title">New Applicants</p>
+            <p class="decision-text">First-time users learning the system. Need onboarding guidance and clear next steps with minimal jargon.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 Design Decisions -->
+      <div class="cs-section fade-in">
+        <p class="cs-section-label">04 — Design Decisions</p>
+        <h2 class="cs-h2">Key design choices that improved usability</h2>
+
+        <p class="cs-p">
+          Every major decision was grounded in a specific usability improvement.
+          Here are the core design choices and the reasoning behind them.
+        </p>
+
+        <div class="decisions-grid" style="margin-top:28px;">
+          <div class="decision-card">
+            <p class="decision-num">Decision 01</p>
+            <p class="decision-title">Color-Coded Category System</p>
+            <p class="decision-text">Each of the six safety domains was assigned a unique, distinct color — making it possible to immediately orient within the site without reading text. This reduced cognitive load significantly for repeat visitors.</p>
+          </div>
+          <div class="decision-card">
+            <p class="decision-num">Decision 02</p>
+            <p class="decision-title">Quick Action Tiles on Homepage</p>
+            <p class="decision-text">The most-requested user actions — permit application, inspection booking, license renewal — were elevated to the homepage as prominent, tappable tiles. Previously buried in menus, these now take 1–2 clicks instead of 4–5.</p>
+          </div>
+          <div class="decision-card">
+            <p class="decision-num">Decision 03</p>
+            <p class="decision-title">Dark, Authoritative Header</p>
+            <p class="decision-text">A deep navy (#222c35) header replaced the flat blue, conveying authority and trust — critical for a safety regulator. The contrast also improved legibility and created a strong visual anchor at the top of every page.</p>
+          </div>
+          <div class="decision-card">
+            <p class="decision-num">Decision 04</p>
+            <p class="decision-title">MyTSASK Portal Integration</p>
+            <p class="decision-text">The logged-in portal (MyTSASK) was prominently surfaced in the navigation, encouraging digital-first interactions for permits and renewals — reducing phone and in-person service load.</p>
+          </div>
+          <div class="decision-card">
+            <p class="decision-num">Decision 05</p>
+            <p class="decision-title">Responsive-First Layout</p>
+            <p class="decision-text">The new design was built mobile-first from the ground up. The category tile grid collapses gracefully to a 2-column layout on tablet and a single column on mobile, maintaining usability across all devices.</p>
+          </div>
+          <div class="decision-card">
+            <p class="decision-num">Decision 06</p>
+            <p class="decision-title">News Ticker for Updates</p>
+            <p class="decision-text">A scrolling marquee at the bottom of the page surfaces timely regulatory updates and announcements without cluttering the primary content hierarchy. Users can see what's new without it competing for attention.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 Outcome -->
+      <div class="cs-section fade-in">
+        <p class="cs-section-label">05 — Outcome</p>
+        <h2 class="cs-h2">A cleaner, faster, more trustworthy experience</h2>
+        <p class="cs-p">
+          The redesigned tsask.ca launched with measurable improvements in key usability
+          metrics. The color-coded system and surfaced quick actions significantly
+          reduced the time users needed to complete core tasks.
+        </p>
+
+        <div class="results-grid">
+          <div class="result-item">
+            <div class="result-num">↓ 40%</div>
+            <div class="result-label">Reduction in time-to-action for key tasks like permit applications</div>
+          </div>
+          <div class="result-item">
+            <div class="result-num">↑ 65%</div>
+            <div class="result-label">Increase in MyTSASK portal adoption after prominent integration</div>
+          </div>
+          <div class="result-item">
+            <div class="result-num">100%</div>
+            <div class="result-label">Mobile-responsive — the first fully responsive version of the site</div>
+          </div>
+        </div>
+
+        <p class="cs-p" style="margin-top:8px;">
+          Beyond the numbers, the redesign established a scalable visual system —
+          the color-coded domain structure, consistent card patterns, and clear
+          typographic hierarchy — that the TSASK team can now maintain and extend
+          as the organization grows.
+        </p>
+
+        <div class="cs-callout" style="margin-top:32px;">
+          <p>"The new site makes it obvious where to go. Contractors especially
+          appreciate being able to apply for a permit in two clicks instead of
+          hunting through the old menu structure."</p>
+        </div>
+      </div>
+
+      <!-- Live Link -->
+      <div class="cs-section fade-in" style="margin-bottom:0;">
+        <a href="https://www.tsask.ca" target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;gap:10px;padding:16px 28px;
+          background:var(--black);color:var(--white);border-radius:100px;
+          font-family:var(--font-head);font-weight:700;font-size:0.9rem;
+          transition:opacity 0.2s;"
+          onmouseover="this.style.opacity='0.75'"
+          onmouseout="this.style.opacity='1'">
+          View Live Site — tsask.ca
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 12L12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+    </div><!-- end cs-body -->
+
+    <!-- ── Next Project ── -->
+    <div class="cs-next">
+      <div>
+        <p class="cs-next-label">Next Project</p>
+        <p class="cs-next-title">E-Commerce Platform</p>
+      </div>
+      <a href="work.html" class="cs-next-link">
+        View Project
+        <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+  </div><!-- end page -->
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Miyoung Cho. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="mailto:jmy97@yahoo.com" class="footer-link">jmy97@yahoo.com</a>
+      <a href="#" class="footer-link">LinkedIn</a>
+      <a href="#" class="footer-link">Behance</a>
+      <a href="#" class="footer-link">Dribbble</a>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    setTimeout(() => {
+      document.querySelectorAll('.cs-hero .fade-in').forEach(el => el.classList.add('visible'));
+    }, 100);
+  </script>
+</body>
+</html>

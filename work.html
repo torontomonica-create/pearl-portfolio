@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Miyoung Cho</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .filter-bar {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--gray-4); letter-spacing: 0.5px;
+      background: var(--gray-1); border: 1px solid var(--gray-2);
+      border-radius: 100px; padding: 7px 16px;
+      cursor: pointer; transition: all 0.2s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--black); color: var(--white);
+      border-color: var(--black);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    @media (max-width: 700px) {
+      .work-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">Miyoung Cho</a>
+    <div class="nav-right">
+      <a href="work.html"    class="nav-link active">Work</a>
+      <a href="about.html"   class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="nav-badge">
+        <span class="dot"></span>
+        Available
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ── Page Hero ── -->
+    <div style="max-width:var(--max-w);margin:0 auto;">
+      <div class="page-hero">
+        <p class="page-hero-label fade-in">Portfolio</p>
+        <h1 class="page-hero-title fade-in stagger-1">Selected<br/>Work</h1>
+        <p class="page-hero-sub fade-in stagger-2">
+          A curated collection of projects across product design,
+          UX research, and design systems.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── Work Grid ── -->
+    <section style="padding:60px 40px 80px;max-width:var(--max-w);margin:0 auto;">
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ux">UX Research</button>
+        <button class="filter-btn" data-filter="ui">UI Design</button>
+        <button class="filter-btn" data-filter="system">Design System</button>
+        <button class="filter-btn" data-filter="branding">Branding</button>
+      </div>
+
+      <div class="work-grid">
+
+        <a href="tsask.html" class="project-card fade-in" data-cat="ux ui">
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder thumb-1" style="background:#222c35;flex-direction:column;gap:10px;">
+              <span style="font-family:'Manrope',sans-serif;font-size:1.6rem;font-weight:900;color:#fff;letter-spacing:-1px;">TSASK</span>
+              <div style="display:flex;gap:5px;">
+                <span style="width:14px;height:3px;border-radius:2px;background:#c5433b;"></span>
+                <span style="width:14px;height:3px;border-radius:2px;background:#bdaf2f;"></span>
+                <span style="width:14px;height:3px;border-radius:2px;background:#678c18;"></span>
+                <span style="width:14px;height:3px;border-radius:2px;background:#1f5677;"></span>
+                <span style="width:14px;height:3px;border-radius:2px;background:#127e6b;"></span>
+                <span style="width:14px;height:3px;border-radius:2px;background:#3a3883;"></span>
+              </div>
+            </div>
+            <div class="project-overlay"><span class="overlay-tag">View Case Study →</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <p class="project-num">01</p>
+              <p class="project-name">TSASK Website Redesign</p>
+              <p class="project-cat">Web Design · UX Research · IA</p>
+            </div>
+            <span class="project-year">2024</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card fade-in stagger-1" data-cat="ui branding">
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder thumb-2">Project Image</div>
+            <div class="project-overlay"><span class="overlay-tag">View Project →</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <p class="project-num">02</p>
+              <p class="project-name">E-Commerce Platform</p>
+              <p class="project-cat">UI Design · Branding</p>
+            </div>
+            <span class="project-year">2024</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card fade-in stagger-2" data-cat="ui system">
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder thumb-3">Project Image</div>
+            <div class="project-overlay"><span class="overlay-tag">View Project →</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <p class="project-num">03</p>
+              <p class="project-name">SaaS Analytics Dashboard</p>
+              <p class="project-cat">Product Design · Design System</p>
+            </div>
+            <span class="project-year">2023</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card fade-in stagger-3" data-cat="ux ui">
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder thumb-4">Project Image</div>
+            <div class="project-overlay"><span class="overlay-tag">View Project →</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <p class="project-num">04</p>
+              <p class="project-name">Fintech Mobile Banking</p>
+              <p class="project-cat">Mobile App · UX Research</p>
+            </div>
+            <span class="project-year">2023</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card fade-in" data-cat="branding">
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder thumb-5">Project Image</div>
+            <div class="project-overlay"><span class="overlay-tag">View Project →</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <p class="project-num">05</p>
+              <p class="project-name">Brand Identity System</p>
+              <p class="project-cat">Branding · Visual Identity</p>
+            </div>
+            <span class="project-year">2022</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card fade-in stagger-1" data-cat="system">
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder thumb-6">Project Image</div>
+            <div class="project-overlay"><span class="overlay-tag">View Project →</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <p class="project-num">06</p>
+              <p class="project-name">Enterprise Design System</p>
+              <p class="project-cat">Design System · Component Library</p>
+            </div>
+            <span class="project-year">2022</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Miyoung Cho. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="mailto:jmy97@yahoo.com" class="footer-link">jmy97@yahoo.com</a>
+      <a href="#" class="footer-link">LinkedIn</a>
+      <a href="#" class="footer-link">Behance</a>
+      <a href="#" class="footer-link">Dribbble</a>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    setTimeout(() => {
+      document.querySelectorAll('.page-hero .fade-in').forEach(el => el.classList.add('visible'));
+    }, 100);
+
+    // Filter logic
+    const btns  = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card[data-cat]');
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(card => {
+          const cats = card.dataset.cat;
+          card.style.display = (f === 'all' || cats.includes(f)) ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
